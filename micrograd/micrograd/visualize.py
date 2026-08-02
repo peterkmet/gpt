@@ -1,4 +1,6 @@
+import numpy as np
 from graphviz import Digraph
+import matplotlib.pyplot as plt
 
 def trace(root):
     nodes, edges = set(), set()
@@ -51,3 +53,17 @@ def draw_mlp(mlp):
         prev = ids
 
     return dot
+
+def draw_digit(imgs):
+    imgs = np.asarray(imgs)
+    if imgs.ndim == 2:          # single 8x8 digit
+        imgs = imgs[None]       # -> (1, 8, 8)
+    N = int(np.ceil(np.sqrt(len(imgs))))
+    pad = np.zeros((N*N - len(imgs), 8, 8))
+    grid = np.concatenate([imgs, pad]).reshape(N, N, 8, 8)
+    big = grid.transpose(0, 2, 1, 3).reshape(N*8, N*8)
+
+    fig = plt.figure(figsize=(12, 12))
+    plt.imshow(big, cmap=plt.get_cmap('gray', 16))
+    plt.axis('off')
+    return fig
