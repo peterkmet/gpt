@@ -86,6 +86,16 @@ class Value:
 
         return out
 
+    def log(self):
+        x = self.data
+        out = Value(math.log(x), (self, ), 'log')
+
+        def _backward():
+            self.grad += (1/x) * out.grad
+        out._backward = _backward
+
+        return out
+    
     def __pow__(self, other):
         assert isinstance(other, (int, float)), "only int or float"
         out = Value(self.data**other, (self,), f'**{other}')
@@ -101,14 +111,16 @@ class Value:
 
         topo = []
         visited = set()
-        def build_topo(v):
-            if v not in visited:
-                visited.add(v)
-                for child in v._prev:
-                    build_topo(child)
+        stack = [(self, False)]
+        while stack:
+            v, processed = stack.pop()
+            if processed:
                 topo.append(v)
-
-        build_topo(self)
+            elif v not in visited:
+                visited.add(v)
+                stack.append((v, True))
+                for child in v._prev:
+                    stack.append((child, False))
 
         for node in reversed(topo):
             node._backward()

@@ -70,14 +70,14 @@ def test_tanh_exp():
 
     a = Value(0.7)
     b = a.tanh() + a.exp()
-    c = (2.0 - b).tanh()   # exercises __rsub__
+    c = (2.0 - b).tanh() + (a.exp() + 1.0).log()
     c.backward()
     amg, cmg = a, c
 
     a = torch.Tensor([0.7]).double()
     a.requires_grad = True
     b = torch.tanh(a) + torch.exp(a)
-    c = torch.tanh(2.0 - b)
+    c = torch.tanh(2.0 - b) + torch.log(torch.exp(a) + 1.0)
     c.backward()
     apt, cpt = a, c
 
