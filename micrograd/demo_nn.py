@@ -27,8 +27,8 @@ print(loss)
 # bacward propagation for all 4 passes!
 loss.backward() # PURE GENIUS
 
-draw_mlp(network).render('neural_network', format='svg', cleanup=True)
-draw_dot(loss).render('neural_network_computation', format='svg', cleanup=True)
+draw_mlp(network).render('svg/neural_network', format='svg', cleanup=True)
+draw_dot(loss).render('svg/neural_network_computation', format='svg', cleanup=True)
 
 #out.backward()
 #draw_dot(out).render('neural_network_computation', format='svg', cleanup=True)

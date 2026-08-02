@@ -20,4 +20,4 @@ o = n.tanh(); o.label = 'o'
 o.backward()
 
 dot = draw_dot(o)
-dot.render('computation_graph', format='svg', cleanup=True)
+dot.render('svg/computation_graph', format='svg', cleanup=True)
