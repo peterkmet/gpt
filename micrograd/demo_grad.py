@@ -1,5 +1,5 @@
-from grad import Value
-from visualize import draw_dot
+from micrograd.grad import Value
+from micrograd.visualize import draw_dot
 
 x1 = Value(2.0, label = 'x1')
 x2 = Value(0.0, label = 'x2')

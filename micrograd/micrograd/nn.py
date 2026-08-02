@@ -1,5 +1,5 @@
 import random
-from grad import Value
+from .grad import Value
 
 class Neuron:
     def __init__(self, nin, name):

@@ -20,10 +20,10 @@ def draw_dot(root):
         dot.node(name = uid, label = "{ %s | d %.2f | g %.2f}" % (n.label, n.data, n.grad), shape='record')
         if n._op:
             dot.node(name = uid + n._op, label = n._op)
-            dot.edge(uid + n._op, uid)
+            dot.edge(uid + n._op, uid + ':w')
 
     for n1, n2 in edges:
-        dot.edge(str(id(n1)), str(id(n2)) + n2._op)
+        dot.edge(f'{id(n1)}:e', f'{id(n2)}{n2._op}:w')
 
     return dot
 
@@ -34,7 +34,7 @@ def draw_mlp(mlp):
     # net inputs
     for i, xi in enumerate(mlp.x):
         uid = f'x{i}'
-        dot.node(uid, label=f'{{ {uid} | <out> {xi.data:.2f} }}', shape='record')
+        dot.node(uid, label=f'{{ {uid} | <out> {getattr(xi, "data", xi):.2f} }}', shape='record')
         prev.append(uid)
 
     # net layers

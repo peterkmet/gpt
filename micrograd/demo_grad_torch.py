@@ -11,7 +11,7 @@ o = torch.tanh(n)
 
 print(o.data.item())
 o.backward()
-
+assert x1.grad is not None and x2.grad is not None and w1.grad is not None and w2.grad is not None
 print('-------')
 print('x2', x2.grad.item())
 print('w2', w2.grad.item())
