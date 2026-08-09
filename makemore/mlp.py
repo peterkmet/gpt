@@ -6,14 +6,14 @@ from data import words, itos, build_dataset
 
 # config
 device = torch.device("mps")
-block_size = 3      # context length
-emb_dim = 10         # size of C embedding
-hidden = 200        # hidden layer size
-steps = 20000       # training steps
+block_size = 4      # context length
+emb_dim = 10        # size of C embedding
+hidden = 300        # hidden layer size
+steps = 10000       # training steps
 batch_size = 16384  # examples per minibatch
 lr_start = 1        # lr multiplier start
 lr_decay = 0.1      # lr multiplier after decay point
-decay_at = 0.5      # fraction of steps after which lr decays
+decay_at = 0.75      # fraction of steps after which lr decays
 vocab_size = len(itos)  # 27
 
 print("device:       ", device)
