@@ -2,3 +2,4 @@ __pycache__/
 svg/
 *.svg
 .vscode/
+.DS_Store
